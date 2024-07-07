@@ -1,0 +1,88 @@
+.controles {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--margem-elemento);
+}
+
+#entradaTarefa, #seletorDia, #botaoAdicionarTarefa {
+    padding: var(--padding-elemento);
+    margin-bottom: var(--margem-elemento);
+    border-radius: var(--borda-radius);
+    border: none;
+    font-size: 1rem;
+}
+
+#entradaTarefa, #seletorDia {
+    background-color: var(--cor-input);
+    color: var(--cor-texto);
+}
+
+#botaoAdicionarTarefa {
+    background-color: var(--cor-botao);
+    color: var(--cor-texto);
+    cursor: pointer;
+    transition: background-color var(--transicao);
+}
+
+#botaoAdicionarTarefa:hover {
+    background-color: var(--cor-botao-hover);
+}
+
+.botao-filtro {
+    flex: 1;
+    margin: 2px;
+    padding: var(--padding-elemento);
+    font-size: 0.9rem;
+    background-color: var(--cor-input);
+    color: var(--cor-texto);
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--transicao);
+    min-width: calc(33.33% - 4px);
+}
+
+.botao-filtro:hover {
+    background-color: #555555;
+}
+
+.tarefa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--cor-tarefa);
+    padding: var(--padding-elemento);
+    margin: var(--margem-tarefa) 0;
+    border-radius: var(--borda-radius);
+}
+
+.tarefa input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.tarefa button {
+    background-color: var(--cor-botao-excluir);
+    border: none;
+    color: var(--cor-texto);
+    padding: var(--padding-elemento) calc(var(--padding-elemento) / 2);
+    border-radius: var(--borda-radius);
+    cursor: pointer;
+    transition: background-color var(--transicao);
+}
+
+.tarefa button:hover {
+    background-color: var(--cor-botao-excluir-hover);
+}
+
+.subtarefas {
+    margin-left: 20px;
+    margin-top: var(--margem-elemento);
+    background: var(--cor-subtarefa);
+    padding: var(--padding-elemento);
+    border-radius: var(--borda-radius);
+}
+
+.subtarefas li {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--margem-elemento);
+}

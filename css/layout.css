@@ -1,0 +1,47 @@
+.container {
+    background: var(--cor-fundo-container);
+    padding: var(--padding-container);
+    border-radius: var(--borda-radius);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 400px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--cor-texto);
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: var(--margem-elemento);
+}
+
+#listaTarefas {
+    list-style-type: none;
+    padding: 0;
+}
+
+.progresso {
+    margin-top: var(--margem-elemento);
+    text-align: center;
+}
+
+progress {
+    width: 100%;
+    height: 20px;
+    border-radius: var(--borda-radius);
+    appearance: none;
+}
+
+progress::-webkit-progress-bar {
+    background-color: var(--cor-progresso-bar);
+    border-radius: var(--borda-radius);
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--cor-progresso);
+    border-radius: var(--borda-radius);
+}

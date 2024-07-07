@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Tarefas</h1>
+        <div class="controles">
+            <input type="text" id="entradaTarefa" placeholder="Adicionar uma nova tarefa...">
+            <select id="seletorDia">
+                <option value="" disabled selected>Selecione um dia</option>
+                <option value="segunda">Segunda-feira</option>
+                <option value="terca">Terça-feira</option>
+                <option value="quarta">Quarta-feira</option>
+                <option value="quinta">Quinta-feira</option>
+                <option value="sexta">Sexta-feira</option>
+                <option value="sabado">Sábado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+            <button id="botaoAdicionarTarefa">Adicionar Tarefa</button>
+        </div>
+        <div class="filtros">
+            <button class="botao-filtro" data-dia="todos">Todos</button>
+            <button class="botao-filtro" data-dia="segunda">Segunda-feira</button>
+            <button class="botao-filtro" data-dia="terca">Terça-feira</button>
+            <button class="botao-filtro" data-dia="quarta">Quarta-feira</button>
+            <button class="botao-filtro" data-dia="quinta">Quinta-feira</button>
+            <button class="botao-filtro" data-dia="sexta">Sexta-feira</button>
+            <button class="botao-filtro" data-dia="sabado">Sábado</button>
+            <button class="botao-filtro" data-dia="domingo">Domingo</button>
+        </div>
+        <ul id="listaTarefas"></ul>
+        <div class="progresso">
+            <label for="barraProgresso">Progresso: </label>
+            <progress id="barraProgresso" value="0" max="100"></progress>
+        </div>
+    </div>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
