@@ -1,3 +1,4 @@
+/* components.css */
 .controles {
     display: flex;
     flex-direction: column;
@@ -47,33 +48,75 @@
 
 .tarefa {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     background: var(--cor-tarefa);
     padding: var(--padding-elemento);
     margin: var(--margem-tarefa) 0;
     border-radius: var(--borda-radius);
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeIn 0.3s forwards;
 }
 
-.tarefa input[type="checkbox"] {
+.tarefa.adicionada {
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.tarefa.concluida {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+.tarefa .tarefa-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.tarefa-header input[type="checkbox"] {
     margin-right: 10px;
 }
 
-.tarefa button {
-    background-color: var(--cor-botao-excluir);
+.tarefa-header button {
+    background-color: transparent;
     border: none;
     color: var(--cor-texto);
-    padding: var(--padding-elemento) calc(var(--padding-elemento) / 2);
-    border-radius: var(--borda-radius);
     cursor: pointer;
-    transition: background-color var(--transicao);
+    transition: color var(--transicao);
 }
 
-.tarefa button:hover {
-    background-color: var(--cor-botao-excluir-hover);
+.tarefa-header button:hover {
+    color: var(--cor-botao-hover);
 }
 
 .subtarefas {
+    display: flex;
+    flex-direction: column;
     margin-left: 20px;
     margin-top: var(--margem-elemento);
     background: var(--cor-subtarefa);
@@ -83,6 +126,37 @@
 
 .subtarefas li {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: var(--margem-elemento);
+}
+
+.nova-subtarefa {
+    display: flex;
+    align-items: center;
+    margin-top: var(--margem-elemento);
+}
+
+.input-subtarefa {
+    flex: 1;
+    padding: var(--padding-elemento);
+    margin-right: var(--margem-elemento);
+    border-radius: var(--borda-radius);
+    border: none;
+    background-color: var(--cor-input);
+    color: var(--cor-texto);
+}
+
+.botao-adicionar-subtarefa {
+    background-color: var(--cor-botao);
+    border: none;
+    color: var(--cor-texto);
+    padding: var(--padding-elemento) calc(var(--padding-elemento) / 2);
+    border-radius: var(--borda-radius);
+    cursor: pointer;
+    transition: background-color var(--transicao);
+}
+
+.botao-adicionar-subtarefa:hover {
+    background-color: var(--cor-botao-hover);
 }

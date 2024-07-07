@@ -1,5 +1,5 @@
 // app.js
-import { adicionarTarefa, excluirTarefa, concluirTarefa, concluirSubtarefa, filtrarTarefas } from './tarefas.js';
+import { adicionarTarefa, excluirTarefa, concluirTarefa, concluirSubtarefa, adicionarSubtarefa, editarTarefa, editarSubtarefa, filtrarTarefas } from './tarefas.js';
 import { renderizarTarefas } from './ui.js';
 
 export function iniciarAplicacao() {
@@ -23,18 +23,56 @@ export function iniciarAplicacao() {
     });
 
     listaTarefas.addEventListener('click', (event) => {
-        if (event.target.classList.contains('excluir-tarefa')) {
-            const index = event.target.dataset.index;
-            excluirTarefa(index);
-            renderizarTarefas();
+        if (event.target.closest('.excluir-tarefa')) {
+            const index = event.target.closest('.excluir-tarefa').dataset.index;
+            const tarefaElemento = event.target.closest('.tarefa');
+            tarefaElemento.classList.add('concluida');
+            tarefaElemento.addEventListener('animationend', () => {
+                excluirTarefa(index);
+                renderizarTarefas();
+            });
+        } else if (event.target.closest('.adicionar-subtarefa')) {
+            const index = event.target.closest('.adicionar-subtarefa').dataset.index;
+            const nomeSubtarefa = prompt('Digite o nome da subtarefa:');
+            if (nomeSubtarefa) {
+                adicionarSubtarefa(index, nomeSubtarefa);
+                renderizarTarefas();
+            }
+        } else if (event.target.closest('.botao-adicionar-subtarefa')) {
+            const index = event.target.closest('.botao-adicionar-subtarefa').dataset.index;
+            const inputSubtarefa = document.querySelector(`.input-subtarefa[data-index="${index}"]`);
+            const nomeSubtarefa = inputSubtarefa.value.trim();
+            if (nomeSubtarefa) {
+                adicionarSubtarefa(index, nomeSubtarefa);
+                renderizarTarefas();
+            }
+        } else if (event.target.closest('.editar-tarefa')) {
+            const index = event.target.closest('.editar-tarefa').dataset.index;
+            const nomeTarefa = prompt('Edite o nome da tarefa:', tarefas[index].nome);
+            if (nomeTarefa) {
+                editarTarefa(index, nomeTarefa);
+                renderizarTarefas();
+            }
+        } else if (event.target.closest('.editar-subtarefa')) {
+            const indexTarefa = event.target.closest('.editar-subtarefa').dataset.indexTarefa;
+            const indexSubtarefa = event.target.closest('.editar-subtarefa').dataset.indexSubtarefa;
+            const nomeSubtarefa = prompt('Edite o nome da subtarefa:', tarefas[indexTarefa].subtarefas[indexSubtarefa].nome);
+            if (nomeSubtarefa) {
+                editarSubtarefa(indexTarefa, indexSubtarefa, nomeSubtarefa);
+                renderizarTarefas();
+            }
         }
     });
 
     listaTarefas.addEventListener('change', (event) => {
         if (event.target.classList.contains('concluir-tarefa')) {
             const index = event.target.dataset.index;
-            concluirTarefa(index, event.target.checked);
-            renderizarTarefas();
+            const tarefaElemento = event.target.closest('.tarefa');
+            tarefaElemento.classList.add('concluida');
+            tarefaElemento.addEventListener('animationend', () => {
+                concluirTarefa(index, event.target.checked);
+                renderizarTarefas();
+            });
         }
 
         if (event.target.classList.contains('concluir-subtarefa')) {

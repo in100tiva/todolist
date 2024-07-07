@@ -1,5 +1,5 @@
 // ui.js
-import { tarefas, traduzirDia } from './tarefas.js';
+import { tarefas, traduzirDia, adicionarSubtarefa } from './tarefas.js';
 
 export function renderizarTarefas(tarefasFiltradas = tarefas) {
     const listaTarefas = document.getElementById('listaTarefas');
@@ -7,10 +7,18 @@ export function renderizarTarefas(tarefasFiltradas = tarefas) {
     tarefasFiltradas.forEach((tarefa, index) => {
         const itemTarefa = document.createElement('li');
         itemTarefa.classList.add('tarefa');
+        if (tarefa.recente) {
+            itemTarefa.classList.add('adicionada');
+            delete tarefa.recente;
+        }
         itemTarefa.innerHTML = `
-            <input type="checkbox" ${tarefa.concluida ? 'checked' : ''} data-index="${index}" class="concluir-tarefa">
-            <span>${tarefa.nome} (${traduzirDia(tarefa.dia)})</span>
-            <button data-index="${index}" class="excluir-tarefa">Excluir</button>
+            <div class="tarefa-header">
+                <input type="checkbox" ${tarefa.concluida ? 'checked' : ''} data-index="${index}" class="concluir-tarefa">
+                <span class="nome-tarefa">${tarefa.nome} (${traduzirDia(tarefa.dia)})</span>
+                <button data-index="${index}" class="editar-tarefa"><i class="fas fa-edit"></i></button>
+                <button data-index="${index}" class="adicionar-subtarefa"><i class="fas fa-plus"></i></button>
+                <button data-index="${index}" class="excluir-tarefa"><i class="fas fa-trash"></i></button>
+            </div>
         `;
         if (tarefa.subtarefas.length > 0) {
             const listaSubtarefas = document.createElement('ul');
@@ -19,10 +27,17 @@ export function renderizarTarefas(tarefasFiltradas = tarefas) {
                 const itemSubtarefa = document.createElement('li');
                 itemSubtarefa.innerHTML = `
                     <input type="checkbox" ${subtarefa.concluida ? 'checked' : ''} data-index-tarefa="${index}" data-index-subtarefa="${subIndex}" class="concluir-subtarefa">
-                    <span>${subtarefa.nome}</span>
+                    <span class="nome-subtarefa">${subtarefa.nome}</span>
+                    <button data-index-tarefa="${index}" data-index-subtarefa="${subIndex}" class="editar-subtarefa"><i class="fas fa-edit"></i></button>
                 `;
                 listaSubtarefas.appendChild(itemSubtarefa);
             });
+            listaSubtarefas.innerHTML += `
+                <li class="nova-subtarefa">
+                    <input type="text" placeholder="Nova subtarefa..." data-index="${index}" class="input-subtarefa">
+                    <button data-index="${index}" class="botao-adicionar-subtarefa"><i class="fas fa-plus"></i></button>
+                </li>
+            `;
             itemTarefa.appendChild(listaSubtarefas);
         }
         listaTarefas.appendChild(itemTarefa);

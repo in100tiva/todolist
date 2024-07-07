@@ -10,9 +10,19 @@ export function adicionarTarefa(nomeTarefa, diaTarefa) {
         nome: nomeTarefa,
         dia: diaTarefa,
         concluida: false,
-        subtarefas: []
+        subtarefas: [],
+        recente: true
     };
     tarefas.push(novaTarefa);
+    salvarTarefas();
+}
+
+export function adicionarSubtarefa(index, nomeSubtarefa) {
+    const novaSubtarefa = {
+        nome: nomeSubtarefa,
+        concluida: false
+    };
+    tarefas[index].subtarefas.push(novaSubtarefa);
     salvarTarefas();
 }
 
@@ -33,6 +43,16 @@ export function concluirSubtarefa(indexTarefa, indexSubtarefa, concluida) {
     tarefas[indexTarefa].subtarefas[indexSubtarefa].concluida = concluida;
     const todasSubtarefasConcluidas = tarefas[indexTarefa].subtarefas.every(subtarefa => subtarefa.concluida);
     tarefas[indexTarefa].concluida = todasSubtarefasConcluidas;
+    salvarTarefas();
+}
+
+export function editarTarefa(index, nomeTarefa) {
+    tarefas[index].nome = nomeTarefa;
+    salvarTarefas();
+}
+
+export function editarSubtarefa(indexTarefa, indexSubtarefa, nomeSubtarefa) {
+    tarefas[indexTarefa].subtarefas[indexSubtarefa].nome = nomeSubtarefa;
     salvarTarefas();
 }
 
